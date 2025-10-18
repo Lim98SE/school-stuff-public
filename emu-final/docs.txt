@@ -1,0 +1,120 @@
+Computer Docs
+
+================================= Instruction Set =================================
+
+Load/Store
+
+LDIM | 00 | reg, 8-bit value          | load value -> reg
+LDMA | 01 | reg, 16-bit addr          | load mem[addr] -> reg
+LDIO | 02 | reg                       | load io_port -> reg
+LDMX | 03 | rega, 16-bit addr, regb   | load mem[addr + regb] -> rega
+STOR | 04 | reg, 16-bit addr          | put reg -> mem[addr]
+STOX | 05 | rega, 16-bit addr, regb   | put rega -> mem[addr + regb]
+STIO | 06 | reg                       | put reg -> io_port
+BLTN | 0C | 16-bit addr * 3           | copy from addr1 - add2 to addr3 (offsetted) 
+COPY | 0D | rega, regb                | put rega -> regb
+CLRR | 0E | 16-bit addr * 2           | put $00 from addr1 to addr2
+
+Math
+
+ADDR | 0F | rega, regb, regc          | regc = rega + regb (carry)
+SUBT | 10 | rega, regb, regc          | regc = rega - regb (carry)
+MULT | 11 | rega, regb, regc          | regc = rega * regb (carry)
+DIVD | 12 | rega, regb, regc          | regc = rega / regb (floor)
+MODR | 13 | rega, regb, regc          | regc = rega mod regb (floor, carry)
+BAND | 14 | rega, regb, regc          | regc = rega & regb
+BWOR | 15 | rega, regb, regc          | regc = rega | regb
+BXOR | 16 | rega, regb, regc          | regc = rega ^ regb
+BNOT | 17 | rega, regb                | regb = !rega
+BNOR | 18 | rega, regb, regc          | regc = !(rega | regb)
+BXNR | 19 | rega, regb, regc          | regc = !(rega ^ regb)
+BROR | 1A | rega, regb, regc          | regc = rega >> regb
+BROL | 1B | rega, regb, regc          | regc = rega << regb
+SBCD | 1C | none                      | set bcd
+CBCD | 1D | none                      | clear bcd
+
+Program Control
+
+JUMP | 1E | 16-bit addr               | addr -> pc
+SUBR | 1F | 16-bit addr               | push pc -> stack, addr -> pc
+JMPX | 20 | 16-bit addr, reg          | addr + reg -> pc
+SBRX | 21 | 16-bit addr, reg          | push pc -> stack, addr + reg -> pc
+SNEQ | 22 | 16-bit addr, rega, regb   | if (rega != regb): push pc -> stack, addr -> pc
+SEQL | 23 | 16-bit addr, rega, regb   | if (rega == regb):
+SGRT | 24 | 16-bit addr, rega, regb   | if (rega > regb):
+SLES | 25 | 16-bit addr, rega, regb   | if (rega < regb):
+SCAS | 26 | 16-bit addr               | if (status_carry):
+SCAC | 27 | 16-bit addr               | if (!status_carry):
+RETN | 28 | none                      | pop stack -> pc
+
+Others
+
+PUSH | 29 | reg                       | push reg -> stack
+PULL | 2A | reg                       | pop stack -> reg
+IOUT | 2B | reg                       | reg -> io_port
+IOIN | 2C | reg                       | io_port -> reg
+IOCH | 2D | 8-bit value               | value -> io_channel
+STRT | 2E | 16-bit word               | word * 16 -> io_baudrate (range from 16bps - 1.048mbps)
+RSET | 2F | none                      | reset all RAM and registers
+BANK | 30 | 16-bit word * 2           | memory_bank[worda] = wordb
+CLIN | 31 | none                      | clear interrupt status bit
+NOOP | 32 | none                      | do nothing
+KILL | FF | none                      | halt execution entirely
+
+================================= Registers & I/O =================================
+
+Registers
+
+A, B, C -> 8-bit registers
+WA, WB, WC -> 16-bit registers (can be accessed 8 bits at a time with WAL/WAH)
+PC, SP, ST -> internal use only (program counter, stack pointer, status)
+
+I/O Port
+
+Channel 0 -> Serial
+
+Example:
+LDIM A !H
+STIO A
+LDIM A !I
+STIO A
+KILL
+
+================================= Video Controller (VCON) =================================
+
+Memory Range
+
+$8000 - $9000, all 256 banks
+(16 megabytes of vram)
+
+[bank]/[address]
+
+Video Modes:
+$00 -> 24-bit color text mode (80x60, user font)
+    -> 24-bit FG per/char, 24-bit BG per line
+    -> uses $004843 bytes
+
+$01 -> 24-bit color text mode (40x60, user font)
+    -> 24-bit FG per/char, 24-bit BG per line
+    -> uses $003C23 bytes
+
+$02 -> 1-bit mono graphics mode (640x480)
+    -> 2 colors (can be changed during vblank, 24-bit)
+    -> uses $009600 bytes
+
+$03 -> 4-bit color graphics mode (640x480)
+    -> 16 colors (can be changed during vblank, 24-bit)
+    -> uses $025800 bytes
+
+$04 -> 8-bit color graphics mode (320x240)
+    -> 256 colors (can be changed during vblank, 24-bit)
+    -> uses $04B000 bytes
+
+$05 -> i paid for the vram (640x480)
+    -> 24-bit color per pixel
+    -> uses $240000 bytes
+
+$01 -> 24-bit color text mode
+
+Memory Layout:
+00/0000 -> mode

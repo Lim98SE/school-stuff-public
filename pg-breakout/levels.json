@@ -1,0 +1,9 @@
+[
+    {"rows": 2, "colors": "level1.hex"},
+    {"rows": 3, "colors": "level2.hex"},
+    {"rows": 4, "colors": "level3.hex"},
+    {"rows": 5, "colors": "level4.hex"},
+    {"rows": 6, "colors": "level5.hex"},
+    {"rows": 7, "colors": "level6.hex"},
+    {"rows": 7, "colors": "level7.hex"}
+]

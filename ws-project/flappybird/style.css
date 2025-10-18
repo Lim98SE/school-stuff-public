@@ -1,0 +1,47 @@
+html, button {
+    background-color: skyblue;
+    color: #000;
+    font-size: 2.5vh;
+    font-family: monospace;
+}
+
+button {
+    padding-left: 1ch;
+    padding-right: 1ch;
+    border: 0.25ch solid #000;
+}
+
+span.screen {
+    background-color: #000;
+    width: 1ch;
+}
+
+.screen_off {
+    background-color: none;
+    color: skyblue; 
+}
+
+.screen_green {
+    background-color: green;
+    color: green;
+}
+
+.screen_red {
+    background: linear-gradient(90deg, yellow 40%, darkred);
+    color: transparent;
+}
+
+div.container {
+    width: min-content;
+    height: min-content;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+}
+
+#main {
+    margin-top: auto;
+}

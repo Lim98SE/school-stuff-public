@@ -1,0 +1,21 @@
+import pygame as P;from random import randint as R;s=[P.Vector2(0,0)]*4;d=P.Vector2(1,0);K={P.K_DOWN:P.Vector2(0,1),P.K_UP:P.Vector2(0,-1),P.K_LEFT:P.Vector2(-1,0),P.K_RIGHT:P.Vector2(1,0)};r=10;A=0xFF<<(8*2);S=P.Color("#00FF00");a=(R(0,r-1),R(0,r-1));C=P.Surface((r, r));W=P.display.set_mode((r*50,r*50));C=P.Surface((r,r));l=0;q=0;G=P.time.Clock();J=0;N=C.get_at
+def p():
+ global s;s.append(s[-1]+d)
+ try:N(s[-1]).r
+ except:global q;q=1;return
+ if N(s[-1]).r==0:s.pop(0)
+ else:global a;global l;l+=1;a=(R(0,r-1),R(0,r-1))
+while 1:
+ C.fill(0)
+ for event in P.event.get():
+  if event.type==P.KEYDOWN:
+   if d*-1!=K[event.key]and~J:d=K[event.key];J=1
+ if q==0:
+  C.set_at(a,A);p();x=0
+  try:N(s[-1])
+  except:q=1;continue
+  for i in s[:-1]:C.set_at(i,S.lerp("#000F00",x/len(s)));x+=1
+  if N(s[-1]).b!=0:q=1
+  C.set_at(s[-1],S)
+ else:print(l)
+ W.blit(P.transform.scale(C,W.get_size()));P.display.update();J=0;G.tick(9)

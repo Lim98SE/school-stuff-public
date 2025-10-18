@@ -1,0 +1,10 @@
+{
+    "title": "debug song",
+    "author": "Lim95",
+    "song": "songs/candyremix.mp3",
+    "bpm": 150,
+    "notes": [
+        {"note": 7, "time": -300},
+        {"note": 1, "time": 0}
+    ]
+}

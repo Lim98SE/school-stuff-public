@@ -1,0 +1,1 @@
+g++ ./hangman.cpp && ./a.exe

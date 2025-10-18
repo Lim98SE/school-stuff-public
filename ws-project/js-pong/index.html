@@ -1,0 +1,21 @@
+<html id="root">
+    <head>
+        <title>JS-Pong</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id="main">
+            <div id="container">
+                <div id="monitor">
+                    <canvas width="800" height="600" id="screen"></canvas>
+                    <br>
+                    <div id="bottom">
+                        <text onclick="moveBg = !moveBg" id="dbg_toggle">Dynamic Background Toggle</text>
+                        <button onclick="powerOn()" id="power_button">POWER</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="pong.js"></script>
+</html>

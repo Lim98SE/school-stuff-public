@@ -1,0 +1,109 @@
+@font-face {
+    font-family: berkley-mono;
+    src: url("font.ttf");
+}
+
+html {
+    background-color: #000;
+    color: #FFF;
+    font-family: berkley-mono;
+    font-size: 3vh;
+    padding-top: 2ch;
+}
+
+* {
+    font-weight: lighter;
+}
+
+#gui_div text {
+    margin-left: 1ch;
+}
+
+#gui_div #spacing {
+    margin: 6ch;
+}
+
+#playfield {
+    width: 60ch;
+    height: min-content;
+}
+
+#log {
+    overflow: scroll;
+    height: 40ch;
+    border: 0.1ch solid #FFF;
+    margin-top: 0.5ch;
+    padding: 0.5ch;
+}
+
+#entry_box {
+    height: min-content;
+    margin-top: 0.5ch;
+}
+
+#entry_box * {
+    margin-top: auto;
+    height: 3ch;
+    border: 0.1ch solid #FFF;
+    background: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+#entry_box input {
+    width: 85%;
+}
+
+#entry_box button {
+    width: 14%;
+    float: right;
+    margin-left: auto;
+}
+
+#map {
+    height: 84.5%;
+    width: 54ch;
+    border: 0.1ch solid #FFF;
+    float: right;
+}
+
+#main {
+    height: min-content;
+}
+
+#gui_div * {
+    user-select: none;
+}
+
+#reveal_stocks:hover, #reveal_prices:hover {
+    text-decoration: underline;
+    user-select: none;
+}
+
+span.error {
+    color: #F00;
+}
+
+.stock_1 {
+    color: #F00;
+}
+
+.stock_2 {
+    color: #FF0;
+}
+
+.stock_3 {
+    color: #0F0;
+}
+
+.stock_4 {
+    color: #0FF;
+}
+
+#graph {
+    background-color: #FFF;
+    height: 100%;
+    width: 100%;
+    image-rendering: pixelated;
+}

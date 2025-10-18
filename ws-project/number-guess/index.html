@@ -1,0 +1,141 @@
+<html id="root">
+    <head>
+        <title>Number guessing game</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id="container">
+            <div id="ui_div" class="block_div">
+                <text id="ui">Guess something</text>
+            </div>
+            <div id="indicator_div" class="block_div">
+                <text id="indicator"></text>
+            </div>
+            <div id="difficulty_div" class="block_div">
+                <button id="easy" onclick="diff = 1; resetGame();">Easy</button>
+                <button id="medium" onclick="diff = 2; resetGame();">Medium</button>
+                <button id="hard" onclick="diff = 3; resetGame();">Hard</button>
+            </div>
+        </div>
+        <div id="gameover_ui" hidden>
+            <text>Game over! Play again?</text>
+            <button onclick="resetGame()">Yes!</button>
+        </div>
+        <div id="input_area">
+            <input id="guess_entry" min="1" max="100">
+            <button onclick="sendGuess()">Send it!</button>
+        </div>
+        <div id="guesses">
+        </div>
+    </body>
+    <script>
+        var answer = Math.floor(Math.random() * 99) + 1
+        let max_guesses = 10
+        let guesses = max_guesses
+
+        const ui = document.getElementById("ui")
+        const guess_entry = document.getElementById("guess_entry")
+        const indicator = document.getElementById("indicator")
+        const guess_list = document.getElementById("guesses")
+        const input_area = document.getElementById("input_area")
+        const gameover_ui = document.getElementById("gameover_ui")
+
+        const easy_button = document.getElementById("easy")
+        const med_button = document.getElementById("medium")
+        const hard_button = document.getElementById("hard")
+
+        const root = document.getElementById("root")
+
+        var diff = 2
+        const difficulties = [10, 7, 5]
+        const diff_buttons = [easy_button, med_button, hard_button]
+        const diff_cnames = ["easy", "medium", "hard"]
+
+        function resetGame() {
+            answer = Math.floor(Math.random() * 99) + 1
+            gameover_ui.hidden = true
+            input_area.hidden = false
+            guess_list.innerHTML = ""
+            indicator.innerText = "Guess between 1 and 100"
+            indicator.className = ""
+            max_guesses = difficulties[diff - 1]
+            guess_entry.value = null
+            guess_list.hidden = true;
+
+            let index = 1;
+
+            root.className = "diff" + diff;
+
+            for (const button of diff_buttons) {
+                if (index == diff) {
+                    button.className = "selected"
+                } else {
+                    button.className = ""
+                }
+                index ++;
+            }
+
+            guesses = max_guesses
+            updateAll()
+        }
+
+        function gameOver() {
+            gameover_ui.hidden = false
+            updateUi();
+        }
+
+        function sendGuess() {
+            let value = guess_entry.value
+
+            if (value < answer) {
+                indicator.innerText = "Too low!"
+                indicator.className = "low"
+            }
+
+            else if (value > answer) {
+                indicator.innerText = "Too high!"
+                indicator.className = "high"
+            }
+
+            else {
+                indicator.innerText = "YOU WIN!!!"
+                indicator.className = "perfect"
+                guesses -= 1;
+                gameOver()
+                return
+            }
+
+            guess_list.hidden = false;
+
+            let elem = document.createElement("text")
+            elem.innerHTML = "Guess " + ((max_guesses + 1) - guesses) + ": " + value
+            guess_list.appendChild(elem)
+            guess_list.appendChild(document.createElement("br"))
+
+            guesses -= 1;
+
+            if (guesses <= 0) {
+                input_area.hidden = true;
+                indicator.innerText = "You lose! Answer was " + answer
+                indicator.className = "gameover"
+                gameOver()
+            }
+
+            updateAll()
+        }
+
+        function updateUi() {
+            if (guesses != 1) {
+                ui.innerText = guesses + " guesses left"
+            } else {
+                ui.innerText = guesses + " guess left"
+            }
+        }
+
+        function updateAll() {
+            updateUi()
+        }
+
+        window.onload = resetGame
+    </script>
+</html>

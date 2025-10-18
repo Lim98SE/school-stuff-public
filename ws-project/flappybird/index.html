@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <title>flappy bird :3</title>
+    </head>
+    <body>
+        <div class="container">
+            <div id="main">
+                <div id="main_gamescreen">
+        
+                </div>
+                <br>
+                <button id="flap" onclick="flap()">Flap!</button>
+                <br>
+                <p>Score: <span id="score">Score here</span></p>
+            </div>
+            <div id="gameover">
+                <video width="640" height="360" id="jumpscare">
+                    <source src="foxy jumpscare.mp4" type="video/mp4">
+                </video>
+                <audio id="js_audio">
+                    <source src="jumpscare.mp3" type="audio/mp3">
+                </audio>
+                <p>Game over! Your score was <span id="score_go">score here</span>.</p>
+            </div>
+        </div>
+    </body>
+    <script src="bird.js"></script>
+</html>

@@ -1,0 +1,1 @@
+g++ -m32 ./main.cpp -o simon32.exe

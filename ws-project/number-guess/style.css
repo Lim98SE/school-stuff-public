@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+* {
+    font-family: "JetBrains Mono", serif;
+}
+
+html {
+    background-color: #111;
+    color: #FFF;
+    font-size: 5vh;
+    padding: 1ch;
+    padding-top: 0.25ch;
+    transition: background-color 0.5s;
+}
+
+.diff1 {
+    background-color: #093d09;
+}
+
+.diff2 {
+    background-color: #383d09;
+}
+
+.diff3 {
+    background-color: #3d091d;
+}
+
+input, button {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    border: 0.1ch solid #FFF;
+    padding: 0.5ch;
+    background-color: #111;
+}
+
+#guess_entry {
+    width: 9.5ch;
+}
+
+#guesses p {
+    font-size: 3vh;
+}
+
+#gameover_ui {
+    width: 60ch;
+}
+
+#gameover_ui button {
+    float: right;
+    margin-left: auto;
+    margin-right: 1ch;
+    transform: translateY(-0.5ch);
+}
+
+#ui_div {
+    width: 15ch;
+}
+
+#indicator.high {
+    color: #0F2;
+}
+
+#indicator.low {
+    color: #F04;
+}
+
+#indicator.perfect {
+    color: #FF2;
+}
+
+#indicator.gameover {
+    color: #FFF;
+}
+
+.block_div {
+    float: top;
+    height: 3.5ch;
+}
+
+div {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 1ch;
+    width: fit-content;
+    border-radius: 0.25ch;
+    margin: auto;
+    margin-bottom: 1ch;
+    margin-top: none;
+}
+
+#container {
+    display: flex;
+    flex-direction: row;
+    flex-basis: content;
+    gap: 1ch;
+    background: none;
+    margin-bottom: 0px;
+    padding: 0px;
+    height: max-content;
+}
+
+#guesses, #input_area {
+    width: 20ch;
+    transition: height 0.5s;
+}
+
+#easy.selected {
+    background-color: #0F2;
+    color: #000;
+}
+
+#medium.selected {
+    background-color: #FF2;
+    color: #000;
+}
+
+#hard.selected {
+    background-color: #F04;
+    color: #000;
+}
